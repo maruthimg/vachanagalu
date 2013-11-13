@@ -21,11 +21,7 @@ class Vachana < ActiveRecord::Base
     add_search_count(pada, type)
     @results = {}
     vachanas.each do |vachana|
-      words = vachana.vachana.split
-      count = 0
-      words.each do |word|
-        count += 1 if word.upcase.include?(pada.upcase)
-      end
+      count = vachana.vachana.scan(pada).count
       @results[vachana] = count
     end
     unless vachanas.blank?
